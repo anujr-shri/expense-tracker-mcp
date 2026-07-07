@@ -6,7 +6,7 @@ import asyncio
 mcp = FastMCP(name="xyz")
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(BASE, "expense.db")
+DB_PATH = os.path.join(BASE, "/tmp/expense.db")
 os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 
 async def init_db():
