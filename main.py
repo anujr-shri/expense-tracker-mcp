@@ -24,9 +24,7 @@ async def init_db():
         """
 
         await cur.execute(query)
-            
-
-
+        await cur.commit()
 
 
 @mcp.tool()
