@@ -26,7 +26,7 @@ async def init_db():
         await cur.execute(query)
             
 
-asyncio.run(init_db())
+
 
 
 @mcp.tool()
@@ -39,7 +39,7 @@ async def get_expense(start_date: str, end_date: str, category: str | None = Non
         category: Optional category to filter by (e.g. food, travel). If omitted, returns all categories.
     """
     query = """
-    SELECT * FROM expense
+    SELECT * FROM expenses
     WHERE date BETWEEN ? AND ?
     """
     params = [start_date, end_date]
@@ -71,7 +71,7 @@ async def insert_expense(description: str, amount: float, category: str) -> dict
         category: Category the expense belongs to (e.g. food, travel, bills).
     """
     query = """
-    INSERT INTO expense (description, amount, category) VALUES (?, ?, ?)
+    INSERT INTO expenses (description, amount, category) VALUES (?, ?, ?)
     """
     try:
         async with aiosqlite.connect(DB_PATH) as db:
@@ -90,5 +90,6 @@ async def insert_expense(description: str, amount: float, category: str) -> dict
 
 
 if __name__ == "__main__":
+    asyncio.run(init_db())
     mcp.run(transport="http", host="0.0.0.0", port=8000)
 
